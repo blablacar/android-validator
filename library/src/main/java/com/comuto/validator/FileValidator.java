@@ -6,29 +6,29 @@ import java.io.File;
 
 public class FileValidator extends Validator {
 
-  private final FileField fileField;
+    private final FileField fileField;
 
-  public FileValidator(File file) {
-    super();
+    public FileValidator(File file) {
+        super();
 
-    this.fileField = new FileField(file);
-    add(fileField);
-  }
+        this.fileField = new FileField(file);
+        add(fileField);
+    }
 
-  public void setMinSize(long minSize) {
-    this.fileField.setMinSize(minSize);
-  }
+    public void setMinSize(long minSize) {
+        this.fileField.setMinSize(minSize);
+    }
 
-  public void setMinSizeMessage(String minSizeMessage) {
-    this.fileField.setMinSizeMessage(minSizeMessage);
-  }
+    public void setMinSizeMessage(String minSizeMessage) {
+        this.fileField.setMinSizeMessage(minSizeMessage);
+    }
 
-  public void setMaxSize(long maxSize) {
-    this.fileField.setMaxSize(maxSize);
-  }
+    public void setMaxSize(long maxSize) {
+        this.fileField.setMaxSize(maxSize);
+    }
 
-  public void setMaxSizeMessage(String maxSizeMessage) {
-    this.fileField.setMaxSizeMessage(maxSizeMessage);
-  }
+    public void setMaxSizeMessage(String maxSizeMessage) {
+        this.fileField.setMaxSizeMessage(maxSizeMessage);
+    }
 
 }

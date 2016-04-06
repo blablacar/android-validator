@@ -9,13 +9,13 @@ import java.util.List;
 
 public class EditTextField extends Field<EditText, String> {
 
-  public EditTextField(EditText object, List<Constraint<String>> constraints) {
-    super(object, constraints);
-  }
+    public EditTextField(EditText object, List<Constraint<String>> constraints) {
+        super(object, constraints);
+    }
 
-  @Override
-  public String getValue() {
-    return object.getText().toString();
-  }
+    @Override
+    public String getValue() {
+        return object.getText().toString();
+    }
 
 }
