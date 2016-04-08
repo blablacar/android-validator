@@ -28,7 +28,7 @@ public class IsFalseConstraint extends Constraint<Boolean> {
         boolean value = field.getValue();
 
         if (value) {
-            violations.add(new Violation(message, ERROR_NOT_FALSE, field));
+            violations.add(new Violation<>(message, ERROR_NOT_FALSE, field, value));
         }
 
         return violations;

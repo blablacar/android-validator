@@ -19,7 +19,7 @@ public class ImageFileValidator extends Validator {
         imageFileField.setMaxHeightMessage(maxHeightMessage);
     }
 
-    public void setMinSize(long minSize) {
+    public void setMinSize(double minSize) {
         imageFileField.setMinSize(minSize);
     }
 
@@ -27,7 +27,7 @@ public class ImageFileValidator extends Validator {
         imageFileField.setMinSizeMessage(minSizeMessage);
     }
 
-    public void setMaxSize(long maxSize) {
+    public void setMaxSize(double maxSize) {
         imageFileField.setMaxSize(maxSize);
     }
 

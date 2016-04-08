@@ -16,7 +16,7 @@ public class FileField extends SimpleField<File> {
         constraints.add(constraint);
     }
 
-    public void setMinSize(long minSize) {
+    public void setMinSize(double minSize) {
         constraint.setMinSize(minSize);
     }
 
@@ -24,7 +24,7 @@ public class FileField extends SimpleField<File> {
         constraint.setMinSizeMessage(minSizeMessage);
     }
 
-    public void setMaxSize(long maxSize) {
+    public void setMaxSize(double maxSize) {
         constraint.setMaxSize(maxSize);
     }
 

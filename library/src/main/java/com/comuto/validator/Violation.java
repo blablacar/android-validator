@@ -1,16 +1,19 @@
 package com.comuto.validator;
 
-public class Violation {
+public class Violation<T, V> {
     private final String message;
 
     private final String code;
 
-    private final Field field;
+    private final Field<?, T> field;
 
-    public Violation(String message, String code, Field field) {
+    private final V invalidValue;
+
+    public Violation(String message, String code, Field<?, T> field, V invalidValue) {
         this.message = message;
         this.code = code;
         this.field = field;
+        this.invalidValue = invalidValue;
     }
 
     /**
@@ -37,7 +40,12 @@ public class Violation {
      *
      * @return Field The field element of the form which constraint has a violation.
      */
-    public Field getField() {
+    public Field<?, T> getField() {
         return field;
     }
+
+    public V getInvalidValue() {
+        return invalidValue;
+    }
+
 }

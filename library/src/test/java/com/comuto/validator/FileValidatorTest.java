@@ -33,7 +33,7 @@ public class FileValidatorTest {
     public void validateWithMinConstraint() throws Exception {
         FileValidator validator = new FileValidator(file);
 
-        validator.setMinSize(1000000000000000L);
+        validator.setMinSize(100000000000000.0);
         validator.setMinSizeMessage("MIN_SIZE");
 
         List<Violation> violations = validator.validate();
@@ -47,7 +47,7 @@ public class FileValidatorTest {
     public void validateWithMaxConstraint() throws Exception {
         FileValidator validator = new FileValidator(file);
 
-        validator.setMaxSize(1L);
+        validator.setMaxSize(0.001);
         validator.setMaxSizeMessage("MAX_SIZE");
 
         List<Violation> violations = validator.validate();

@@ -29,7 +29,7 @@ public class NotBlankConstraint extends Constraint<String> {
         final List<Violation> violations = new ArrayList<>();
 
         if (null == field.getValue() || field.getValue().trim().isEmpty()) {
-            violations.add(new Violation(message, ERROR_CODE_IS_BLANK, field));
+            violations.add(new Violation<>(message, ERROR_CODE_IS_BLANK, field, field.getValue()));
         }
 
         return violations;

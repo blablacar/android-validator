@@ -15,7 +15,7 @@ public class FileValidator extends Validator {
         add(fileField);
     }
 
-    public void setMinSize(long minSize) {
+    public void setMinSize(double minSize) {
         this.fileField.setMinSize(minSize);
     }
 
@@ -23,7 +23,7 @@ public class FileValidator extends Validator {
         this.fileField.setMinSizeMessage(minSizeMessage);
     }
 
-    public void setMaxSize(long maxSize) {
+    public void setMaxSize(double maxSize) {
         this.fileField.setMaxSize(maxSize);
     }
 

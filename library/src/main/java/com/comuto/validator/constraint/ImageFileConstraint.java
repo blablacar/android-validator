@@ -44,23 +44,23 @@ public class ImageFileConstraint extends FileConstraint {
             options.inJustDecodeBounds = true;
 
             BitmapFactory.decodeFile(field.getValue().getPath(), options);
-            int width = options.outWidth;
-            int height = options.outHeight;
+            final int width = options.outWidth;
+            final int height = options.outHeight;
 
             if (UNSET_VALUE != minWidth && width <= minWidth) {
-                violations.add(new Violation(minWidthMessage, ERROR_CODE_WIDTH_TOO_SMALL, field));
+                violations.add(new Violation<>(minWidthMessage, ERROR_CODE_WIDTH_TOO_SMALL, field, width));
             }
 
             if (UNSET_VALUE != maxWidth && width >= maxWidth) {
-                violations.add(new Violation(maxWidthMessage, ERROR_CODE_WIDTH_TOO_BIG, field));
+                violations.add(new Violation<>(maxWidthMessage, ERROR_CODE_WIDTH_TOO_BIG, field, width));
             }
 
             if (UNSET_VALUE != minHeight && height <= minHeight) {
-                violations.add(new Violation(minHeightMessage, ERROR_CODE_HEIGHT_TOO_SMALL, field));
+                violations.add(new Violation<>(minHeightMessage, ERROR_CODE_HEIGHT_TOO_SMALL, field, height));
             }
 
             if (UNSET_VALUE != maxHeight && height >= maxHeight) {
-                violations.add(new Violation(maxHeightMessage, ERROR_CODE_HEIGHT_TOO_BIG, field));
+                violations.add(new Violation<>(maxHeightMessage, ERROR_CODE_HEIGHT_TOO_BIG, field, height));
             }
         }
 

@@ -1,14 +1,16 @@
 package com.comuto.validator.field;
 
+import com.comuto.validator.Constraint;
 import com.comuto.validator.constraint.ImageFileConstraint;
 
 import java.io.File;
+import java.util.ArrayList;
 
-public class ImageFileField extends FileField {
+public class ImageFileField extends SimpleField<File> {
     private final ImageFileConstraint constraint;
 
     public ImageFileField(File object) {
-        super(object);
+        super(object, new ArrayList<Constraint<File>>());
 
         this.constraint = new ImageFileConstraint();
         constraints.add(constraint);
@@ -46,4 +48,19 @@ public class ImageFileField extends FileField {
         constraint.setMaxHeightMessage(maxHeightMessage);
     }
 
+    public void setMinSize(double minSize) {
+        constraint.setMinSize(minSize);
+    }
+
+    public void setMinSizeMessage(String minSizeMessage) {
+        constraint.setMinSizeMessage(minSizeMessage);
+    }
+
+    public void setMaxSize(double maxSize) {
+        constraint.setMaxSize(maxSize);
+    }
+
+    public void setMaxSizeMessage(String maxSizeMessage) {
+        constraint.setMaxSizeMessage(maxSizeMessage);
+    }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileConstraint extends Constraint<File> {
+    protected static final double MEGABYTE = 1024L * 1024L;
 
     protected static final int UNSET_VALUE = -1;
 
@@ -18,8 +19,10 @@ public class FileConstraint extends Constraint<File> {
     private static final String DEFAULT_MIN_SIZE_TEXT = "The file is too small.";
     private static final String DEFAULT_MAX_SIZE_TEXT = "The file is too large.";
 
-    private long minSize = UNSET_VALUE;
-    private long maxSize = UNSET_VALUE;
+    // in MB
+    private double minSize = UNSET_VALUE;
+    // in MB
+    private double maxSize = UNSET_VALUE;
 
     private String minSizeMessage = DEFAULT_MIN_SIZE_TEXT;
     private String maxSizeMessage = DEFAULT_MAX_SIZE_TEXT;
@@ -27,18 +30,34 @@ public class FileConstraint extends Constraint<File> {
     public FileConstraint() {
     }
 
-    public void setMinSize(long minSize) {
-        this.minSize = minSize;
+    /**
+     * Set file min size.
+     * @param minSize in MB.
+     */
+    public void setMinSize(double minSize) {
+        this.minSize = minSize * MEGABYTE;
     }
 
+    /**
+     * Set file min size error message.
+     * @param minSizeMessage String error message.
+     */
     public void setMinSizeMessage(String minSizeMessage) {
         this.minSizeMessage = minSizeMessage;
     }
 
-    public void setMaxSize(long maxSize) {
-        this.maxSize = maxSize;
+    /**
+     * Set file max size.
+     * @param maxSize in MB.
+     */
+    public void setMaxSize(double maxSize) {
+        this.maxSize = maxSize * MEGABYTE;
     }
 
+    /**
+     * Set file max size error message.
+     * @param maxSizeMessage String error message.
+     */
     public void setMaxSizeMessage(String maxSizeMessage) {
         this.maxSizeMessage = maxSizeMessage;
     }
@@ -49,11 +68,11 @@ public class FileConstraint extends Constraint<File> {
         final long size = field.getValue().length();
 
         if (UNSET_VALUE != minSize && size <= minSize) {
-            violations.add(new Violation(minSizeMessage, ERROR_CODE_TOO_SMALL, field));
+            violations.add(new Violation<>(minSizeMessage, ERROR_CODE_TOO_SMALL, field, size));
         }
 
         if (UNSET_VALUE != maxSize && size >= maxSize) {
-            violations.add(new Violation(maxSizeMessage, ERROR_CODE_TOO_LARGE, field));
+            violations.add(new Violation<>(maxSizeMessage, ERROR_CODE_TOO_LARGE, field, size));
         }
 
         return violations;
