@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="ic_payment_black_24dp">@null</drawable>
+    <drawable name="ic_location_on_black_24dp">@null</drawable>
+    <drawable name="ic_check_circle_white_72dp">@null</drawable>
+</resources>

@@ -8,18 +8,21 @@ import com.comuto.validator.Violation;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NotBlankConstraint extends Constraint<Object> {
-    public static final String ERROR_CODE_IS_BLANK = "ERROR_CODE_IS_BLANK";
+public class NotEqualsConstraint extends Constraint<Object> {
+    public static final String ERROR_CODE_IS_NOT_EQUALS = "ERROR_CODE_IS_NOT_EQUALS";
 
-    protected String message = "This value should not be blank.";
+    protected final String expectedValue;
+    protected String message = "This value should not be equal to %s.";
 
-    public NotBlankConstraint(Object object, String propertyName) {
+    public NotEqualsConstraint(Object object, String expectedValue, String propertyName) {
         super(object, propertyName);
+
+        this.expectedValue = expectedValue;
     }
 
-    @NonNull
     @Override
-    public Set<Violation> validate() throws UnsupportedException {
+    @NonNull
+    public Set<Violation> validate() {
         final Set<Violation> violations = new HashSet<>();
         final String value;
 
@@ -33,8 +36,8 @@ public class NotBlankConstraint extends Constraint<Object> {
             throw new UnsupportedException(this, object, propertyName);
         }
 
-        if (null != value && 0 == value.trim().length()) {
-            violations.add(new Violation(propertyName, value, message, ERROR_CODE_IS_BLANK));
+        if (value.equals(expectedValue)) {
+            violations.add(new Violation(propertyName, value, String.format(message, value), ERROR_CODE_IS_NOT_EQUALS));
         }
 
         return violations;
