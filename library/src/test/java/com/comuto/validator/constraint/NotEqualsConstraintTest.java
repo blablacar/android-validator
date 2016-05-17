@@ -16,41 +16,42 @@ import static com.comuto.validator.Utils.assertNotEmpty;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class NotBlankConstraintTest {
+public class NotEqualsConstraintTest {
 
     @Test
     public void isValid() throws Exception {
-        assertEmpty("is valid with String", new NotBlankConstraint("test", "string").validate());
+        assertEmpty("is valid with String", new NotEqualsConstraint("test", "not", "string").validate());
 
         EditText editText = new EditText(RuntimeEnvironment.application);
         editText.setText("test");
-        assertEmpty("is valid with EditText", new NotBlankConstraint(editText, "editText").validate());
+        assertEmpty("is valid with EditText", new NotEqualsConstraint(editText, "not", "editText").validate());
 
         Spinner spinner = new Spinner(RuntimeEnvironment.application);
         spinner.setAdapter(
             new ArrayAdapter<>(RuntimeEnvironment.application, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>() {{
                 add("test");
             }}));
-        assertEmpty("is valid with Spinner", new NotBlankConstraint(spinner, "spinner").validate());
+        assertEmpty("is valid with Spinner", new NotEqualsConstraint(spinner, "not", "spinner").validate());
     }
 
     @Test
     public void isInvalid() throws Exception {
-        assertNotEmpty("is invalid with String", new NotBlankConstraint("", "string").validate());
+        assertNotEmpty("is invalid with String", new NotEqualsConstraint("test", "test", "string").validate());
 
         EditText editText = new EditText(RuntimeEnvironment.application);
-        assertNotEmpty("is invalid with EditText", new NotBlankConstraint(editText, "editText").validate());
+        editText.setText("test");
+        assertNotEmpty("is invalid with EditText", new NotEqualsConstraint(editText, "test", "editText").validate());
 
         Spinner spinner = new Spinner(RuntimeEnvironment.application);
         spinner.setAdapter(
             new ArrayAdapter<>(RuntimeEnvironment.application, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>() {{
-                add("");
+                add("test");
             }}));
-        assertNotEmpty("is invalid with Spinner", new NotBlankConstraint(spinner, "string").validate());
+        assertNotEmpty("is invalid with Spinner", new NotEqualsConstraint(spinner, "test", "spinner").validate());
     }
 
     @Test(expected = UnsupportedException.class)
     public void testUnsupported() throws Exception {
-        new NotBlankConstraint(new Object(), "test").validate();
+        new NotEqualsConstraint(new Object(), "test", "test").validate();
     }
 }
