@@ -31,14 +31,17 @@ public class MatchConstraint extends Constraint<Object> {
         if (object instanceof EditText) {
             value = ((EditText) object).getText().toString();
         } else if (object instanceof Spinner) {
-            value = ((Spinner) object).getSelectedItem().toString();
+            Spinner spinner = ((Spinner) object);
+            value = null != spinner.getSelectedItem() ? spinner.getSelectedItem().toString() : null;
         } else if (object instanceof String) {
             value = (String) object;
+        } else if (null == object) {
+            value = null;
         } else {
             throw new UnsupportedException(this, object, propertyName);
         }
 
-        if (null != value && !pattern.matcher(value).matches()) {
+        if (null == value || !pattern.matcher(value).matches()) {
             violations.add(new Violation(propertyName, value, message, ERROR_CODE_NOT_MATCH));
         }
 

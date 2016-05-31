@@ -2,7 +2,7 @@ package com.comuto.validator.constraint;
 
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import com.comuto.validator.UnsupportedException;
 import com.comuto.validator.Violation;
@@ -27,8 +27,8 @@ public class IsCheckedConstraint<T extends View> extends Constraint<T> {
         if (object instanceof RadioGroup) {
             RadioGroup radioGroup = (RadioGroup) object;
             isChecked = View.NO_ID != radioGroup.getCheckedRadioButtonId();
-        } else if (object instanceof RadioButton) {
-            RadioButton radioButton = (RadioButton) object;
+        } else if (object instanceof CompoundButton) {
+            CompoundButton radioButton = (CompoundButton) object;
             isChecked = radioButton.isChecked();
         } else {
             throw new UnsupportedException(this, object, propertyName);
