@@ -1,9 +1,6 @@
 package com.comuto.validator.constraint;
 
 import android.support.annotation.NonNull;
-import android.widget.EditText;
-import android.widget.Spinner;
-import com.comuto.validator.UnsupportedException;
 import com.comuto.validator.Violation;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,19 +21,9 @@ public class EqualsConstraint extends Constraint<Object> {
     @NonNull
     public Set<Violation> validate() {
         final Set<Violation> violations = new HashSet<>();
-        final String value;
+        final String value = getStringFromObject(object, propertyName);
 
-        if (object instanceof EditText) {
-            value = ((EditText) object).getText().toString();
-        } else if (object instanceof Spinner) {
-            value = ((Spinner) object).getSelectedItem().toString();
-        } else if (object instanceof String) {
-            value = (String) object;
-        } else {
-            throw new UnsupportedException(this, object, propertyName);
-        }
-
-        if (!value.equals(expectedValue)) {
+        if (!expectedValue.equalsIgnoreCase(value)) {
             violations.add(new Violation(propertyName, value, String.format(message, value), ERROR_CODE_IS_NOT_EQUALS));
         }
 

@@ -31,6 +31,6 @@ import static com.comuto.validator.Utils.assertNotEmpty;
             new EmailConstraint(generateEditText(NOT_VALID), PROPERTY_NAME).validate());
 
         assertNotEmpty("is not valid with Spinner",
-            new EmailConstraint(generateSpinner(NOT_VALID), "spinner").validate());
+            new EmailConstraint(generateSpinner(NOT_VALID), PROPERTY_NAME).validate());
     }
 }
