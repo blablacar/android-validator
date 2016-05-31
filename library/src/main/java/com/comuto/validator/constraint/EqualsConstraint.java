@@ -8,13 +8,13 @@ import com.comuto.validator.Violation;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NotEqualsConstraint extends Constraint<Object> {
-    public static final String ERROR_CODE_EQUALS = "ERROR_CODE_EQUALS";
+public class EqualsConstraint extends Constraint<Object> {
+    public static final String ERROR_CODE_IS_NOT_EQUALS = "ERROR_CODE_IS_NOT_EQUALS";
 
     protected final String expectedValue;
-    protected String message = "This value should not be equal to %s.";
+    protected String message = "This value should be equal to %s.";
 
-    public NotEqualsConstraint(Object object, String expectedValue, String propertyName) {
+    public EqualsConstraint(Object object, String expectedValue, String propertyName) {
         super(object, propertyName);
 
         this.expectedValue = expectedValue;
@@ -36,8 +36,8 @@ public class NotEqualsConstraint extends Constraint<Object> {
             throw new UnsupportedException(this, object, propertyName);
         }
 
-        if (value.equals(expectedValue)) {
-            violations.add(new Violation(propertyName, value, String.format(message, value), ERROR_CODE_EQUALS));
+        if (!value.equals(expectedValue)) {
+            violations.add(new Violation(propertyName, value, String.format(message, value), ERROR_CODE_IS_NOT_EQUALS));
         }
 
         return violations;

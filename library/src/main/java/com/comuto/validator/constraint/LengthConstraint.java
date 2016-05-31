@@ -48,9 +48,9 @@ public class LengthConstraint extends Constraint<Object> {
         }
 
         if (null == value || min > value.trim().length()) {
-            violations.add(new Violation(propertyName, value, minMessage, ERROR_CODE_TOO_SMALL));
+            violations.add(new Violation(propertyName, value, String.format(minMessage, value), ERROR_CODE_TOO_SMALL));
         } else if(max < value.trim().length()) {
-            violations.add(new Violation(propertyName, value, maxMessage, ERROR_CODE_TOO_LARGE));
+            violations.add(new Violation(propertyName, value, String.format(minMessage, value), ERROR_CODE_TOO_LARGE));
         }
 
         return violations;
