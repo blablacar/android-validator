@@ -7,13 +7,25 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * Validator class where you should put your Constraints on fields.
+ * This class will validate all constraints through {@see validate()}.
+ */
 public class Validator {
     private final Set<Constraint> constraints;
 
+    /**
+     * Initialize validator with an empty HashSet of Constraint.
+     */
     public Validator() {
         this(new HashSet<Constraint>());
     }
 
+    /**
+     * Initialize validator with a Set of Constraint.
+     *
+     * @param constraints A Set of Constraint you want to validate.
+     */
     public Validator(Set<Constraint> constraints) {
         this.constraints = constraints;
     }

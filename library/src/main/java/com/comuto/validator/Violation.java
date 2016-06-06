@@ -1,11 +1,22 @@
 package com.comuto.validator;
 
+/**
+ * Violation return by a {@code Constraint} when object value violate the constraint.
+ */
 public class Violation {
     private final String propertyName;
     private final Object invalidValue;
     private final String message;
     private final String code;
 
+    /**
+     * Construct the violation with final values.
+     *
+     * @param propertyName The name of the field. This is defined by the user.
+     * @param invalidValue The invalid which have violate the constraint.
+     * @param message The interpolated message.
+     * @param code The Error code of the constraint.
+     */
     public Violation(String propertyName, Object invalidValue, String message, String code) {
         this.propertyName = propertyName;
         this.invalidValue = invalidValue;

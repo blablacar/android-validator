@@ -2,6 +2,9 @@ package com.comuto.validator;
 
 import com.comuto.validator.constraint.Constraint;
 
+/**
+ * Exception thrown when the library doesn't the object pass into a {@code Constraint}.
+ */
 public class UnsupportedException extends RuntimeException {
     /**
      * Constructs a new {@code RuntimeException} with the current stack trace
