@@ -1,8 +1,6 @@
 package com.comuto.validator.constraint;
 
 import android.support.annotation.NonNull;
-import android.widget.EditText;
-import android.widget.Spinner;
 import com.comuto.validator.UnsupportedException;
 import com.comuto.validator.Violation;
 import java.util.HashSet;
@@ -13,7 +11,7 @@ public class NotBlankConstraint extends Constraint<Object> {
 
     protected String message = "This value should not be blank.";
 
-    public NotBlankConstraint(Object object, String propertyName) {
+    public NotBlankConstraint(@NonNull Object object, @NonNull String propertyName) {
         super(object, propertyName);
     }
 
@@ -21,19 +19,9 @@ public class NotBlankConstraint extends Constraint<Object> {
     @Override
     public Set<Violation> validate() throws UnsupportedException {
         final Set<Violation> violations = new HashSet<>();
-        final String value;
+        final String value = getStringFromObject(object, propertyName);
 
-        if (object instanceof EditText) {
-            value = ((EditText) object).getText().toString();
-        } else if (object instanceof Spinner) {
-            value = ((Spinner) object).getSelectedItem().toString();
-        } else if (object instanceof String) {
-            value = (String) object;
-        } else {
-            throw new UnsupportedException(this, object, propertyName);
-        }
-
-        if (null != value && 0 == value.trim().length()) {
+        if (null == value || 0 == value.trim().length()) {
             violations.add(new Violation(propertyName, value, message, ERROR_CODE_IS_BLANK));
         }
 

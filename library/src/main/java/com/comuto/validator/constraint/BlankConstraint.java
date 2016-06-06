@@ -5,19 +5,14 @@ import com.comuto.validator.UnsupportedException;
 import com.comuto.validator.Violation;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
-public class MatchConstraint extends Constraint<Object> {
-    public static final String ERROR_CODE_NOT_MATCH = "ERROR_CODE_NOT_MATCH";
+public class BlankConstraint extends Constraint<Object> {
+    public static final String ERROR_CODE_IS_NOT_BLANK = "ERROR_CODE_IS_NOT_BLANK";
 
-    protected final Pattern pattern;
+    protected String message = "This value should be blank.";
 
-    protected String message = "This value is not valid.";
-
-    public MatchConstraint(@NonNull Object object, @NonNull Pattern pattern, @NonNull String propertyName) {
+    public BlankConstraint(@NonNull Object object, @NonNull String propertyName) {
         super(object, propertyName);
-
-        this.pattern = pattern;
     }
 
     @NonNull
@@ -26,8 +21,8 @@ public class MatchConstraint extends Constraint<Object> {
         final Set<Violation> violations = new HashSet<>();
         final String value = getStringFromObject(object, propertyName);
 
-        if (null == value || !pattern.matcher(value).matches()) {
-            violations.add(new Violation(propertyName, value, message, ERROR_CODE_NOT_MATCH));
+        if (null != value && 0 != value.trim().length()) {
+            violations.add(new Violation(propertyName, value, message, ERROR_CODE_IS_NOT_BLANK));
         }
 
         return violations;
