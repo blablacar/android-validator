@@ -1,31 +1,30 @@
 package com.comuto.validator;
 
-import com.comuto.validator.field.FileField;
-
-import org.junit.Before;
+import com.comuto.validator.constraint.NotBlankConstraint;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
-import java.io.File;
+import static junit.framework.Assert.assertEquals;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = Config.NONE)
 public class ValidatorTest {
 
-    private File file;
+    @Test
+    public void validateWithoutViolations() throws Exception {
+        Validator validator = new Validator();
+        validator.add(new NotBlankConstraint("Test", "string"));
 
-    @Before
-    public void setUp() throws Exception {
-        file = Utils.getFileFromResource(this, "test-file.png");
+        assertEquals("Has no violations", 0, validator.validate().size());
     }
 
     @Test
-    public void testValidate() throws Exception {
+    public void validateWithViolations() throws Exception {
         Validator validator = new Validator();
-        validator.add(new FileField(file));
+        validator.add(new NotBlankConstraint("", "string"));
 
-        assertNotNull("Validator validations not null", validator.validate());
-        assertTrue("Validator validations list is empty", validator.validate().isEmpty());
+        assertEquals("Has violations", 1, validator.validate().size());
     }
-
 }

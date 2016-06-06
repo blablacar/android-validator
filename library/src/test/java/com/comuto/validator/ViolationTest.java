@@ -1,24 +1,38 @@
 package com.comuto.validator;
 
-import com.comuto.validator.field.FileField;
-
 import org.junit.Test;
-
-import java.io.File;
 
 import static junit.framework.Assert.assertEquals;
 
 public class ViolationTest {
-    private static final String MESSAGE = "MESSAGE";
-    private static final String ERROR_CODE = "ERROR_CODE";
-    private static final FileField FILE_FIELD = new FileField(null);
+    private static final Object INVALID_VALUE = new Object();
+    private static final String ERROR_MESSAGE = "ERROR";
+    private static final String PROPERTY = "property";
+    private static final String CODE = "CODE";
+
+    private final Violation violation;
+
+    public ViolationTest() {
+        this.violation = new Violation(PROPERTY, INVALID_VALUE, ERROR_MESSAGE, CODE);
+    }
 
     @Test
-    public void testValues() throws Exception {
-        Violation violation = new Violation<>(MESSAGE, ERROR_CODE, FILE_FIELD, (File) null);
+    public void getMessage() throws Exception {
+        assertEquals("Message equals", ERROR_MESSAGE, violation.getMessage());
+    }
 
-        assertEquals("Message", MESSAGE, violation.getMessage());
-        assertEquals("Error code", ERROR_CODE, violation.getCode());
-        assertEquals("File field", FILE_FIELD, violation.getField());
+    @Test
+    public void getInvalidValue() throws Exception {
+        assertEquals("Invalid value equals", INVALID_VALUE, violation.getInvalidValue());
+    }
+
+    @Test
+    public void getPropertyName() throws Exception {
+        assertEquals("Property name equals", PROPERTY, violation.getPropertyName());
+    }
+
+    @Test
+    public void getCode() throws Exception {
+        assertEquals("Code equals", CODE, violation.getCode());
     }
 }
