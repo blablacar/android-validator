@@ -1,3 +1,4 @@
-include ':sample', ':library'
+include ":sample", ":library"
 
-rootProject.name = 'validator'
+rootProject.name = "android-validator-parent"
+project(":library").name = "android-validator"
