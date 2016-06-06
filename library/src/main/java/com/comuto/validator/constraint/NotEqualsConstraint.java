@@ -11,7 +11,7 @@ public class NotEqualsConstraint extends Constraint<Object> {
     protected final String expectedValue;
     protected String message = "This value should not be equal to %s.";
 
-    public NotEqualsConstraint(Object object, String expectedValue, String propertyName) {
+    public NotEqualsConstraint(@NonNull Object object, @NonNull String expectedValue, @NonNull String propertyName) {
         super(object, propertyName);
 
         this.expectedValue = expectedValue;

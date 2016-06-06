@@ -19,7 +19,7 @@ public class FileConstraint extends Constraint<File> {
     protected String minMessage = "Please choose a file of min. %sMB.";
     protected String maxMessage = "Please choose a file of max. %sMB.";
 
-    public FileConstraint(File object, String propertyName) {
+    public FileConstraint(@NonNull File object, @NonNull String propertyName) {
         super(object, propertyName);
     }
 

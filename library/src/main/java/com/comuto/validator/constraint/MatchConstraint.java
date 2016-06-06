@@ -14,7 +14,7 @@ public class MatchConstraint extends Constraint<Object> {
 
     protected String message = "This value is not valid.";
 
-    public MatchConstraint(Object object, Pattern pattern, String propertyName) {
+    public MatchConstraint(@NonNull Object object, @NonNull Pattern pattern, @NonNull String propertyName) {
         super(object, propertyName);
 
         this.pattern = pattern;

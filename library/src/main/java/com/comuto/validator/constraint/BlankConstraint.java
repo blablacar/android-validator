@@ -11,7 +11,7 @@ public class BlankConstraint extends Constraint<Object> {
 
     protected String message = "This value should be blank.";
 
-    public BlankConstraint(Object object, String propertyName) {
+    public BlankConstraint(@NonNull Object object, @NonNull String propertyName) {
         super(object, propertyName);
     }
 

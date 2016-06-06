@@ -14,7 +14,7 @@ public class IsCheckedConstraint<T extends View> extends Constraint<T> {
 
     protected String message = "This should have at least one checked choice.";
 
-    public IsCheckedConstraint(T object, String propertyName) {
+    public IsCheckedConstraint(@NonNull T object, @NonNull String propertyName) {
         super(object, propertyName);
     }
 

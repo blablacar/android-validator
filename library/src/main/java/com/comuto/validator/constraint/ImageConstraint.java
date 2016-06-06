@@ -20,7 +20,7 @@ public class ImageConstraint extends Constraint<File> {
     protected String minMessage = "Please choose an image of min. %d x %d pixels.";
     protected String maxMessage = "Please choose an image of max. %d x %d pixels.";
 
-    public ImageConstraint(@NonNull File object, String propertyName) {
+    public ImageConstraint(@NonNull File object, @NonNull String propertyName) {
         super(object, propertyName);
     }
 

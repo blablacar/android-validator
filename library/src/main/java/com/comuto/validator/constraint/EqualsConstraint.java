@@ -11,7 +11,7 @@ public class EqualsConstraint extends Constraint<Object> {
     protected final String expectedValue;
     protected String message = "This value should be equal to %s.";
 
-    public EqualsConstraint(Object object, String expectedValue, String propertyName) {
+    public EqualsConstraint(@NonNull Object object, @NonNull String expectedValue, @NonNull String propertyName) {
         super(object, propertyName);
 
         this.expectedValue = expectedValue;
