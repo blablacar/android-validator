@@ -22,9 +22,15 @@ public class FileConstraint extends Constraint<File> {
      */
     public static final String ERROR_CODE_TOO_LARGE = "ERROR_CODE_TOO_LARGE";
 
+    /**
+     * Constant pass to Violation when file cannot be loaded.
+     */
+    public static final String ERROR_CODE_NOT_EXISTS = "ERROR_CODE_NOT_EXISTS";
+
     protected double min = 0;
     protected double max = Double.MAX_VALUE;
 
+    protected String notExistsMessage = "This file couldn't be loaded.";
     protected String minMessage = "Please choose a file of min. %sMB.";
     protected String maxMessage = "Please choose a file of max. %sMB.";
 
@@ -49,12 +55,12 @@ public class FileConstraint extends Constraint<File> {
     public Set<Violation> validate() throws UnsupportedException {
         final Set<Violation> violations = new HashSet<>();
 
-        final long size = object.length();
-
-        if (size <= min) {
-            violations.add(new Violation(propertyName, object, String.format(minMessage, min), ERROR_CODE_TOO_SMALL));
-        } else if (size >= max) {
-            violations.add(new Violation(propertyName, object, String.format(maxMessage, max), ERROR_CODE_TOO_LARGE));
+        if (!object.exists() || !object.isFile() || !object.canRead()) {
+            violations.add(new Violation(propertyName, object, notExistsMessage, ERROR_CODE_NOT_EXISTS));
+        } else if (object.length() <= min) {
+            violations.add(new Violation(propertyName, object, String.format(minMessage, min / MEGABYTE), ERROR_CODE_TOO_SMALL));
+        } else if (object.length() >= max) {
+            violations.add(new Violation(propertyName, object, String.format(maxMessage, max / MEGABYTE), ERROR_CODE_TOO_LARGE));
         }
 
         return violations;
@@ -76,6 +82,15 @@ public class FileConstraint extends Constraint<File> {
      */
     public void setMax(double max) {
         this.max = max * MEGABYTE;
+    }
+
+    /**
+     * Set the not exists error message when file cannot be loaded.
+     *
+     * @param notExistsMessage error message.
+     */
+    public void setNotExistsMessage(String notExistsMessage) {
+        this.notExistsMessage = notExistsMessage;
     }
 
     /**
