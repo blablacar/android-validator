@@ -1,6 +1,7 @@
 # Android validator
 
 [ ![Download](https://api.bintray.com/packages/blablacar/maven/android-validator/images/download.svg) ](https://bintray.com/blablacar/maven/android-validator/_latestVersion)
+[![Build Status](https://travis-ci.org/blablacar/android-validator.svg?branch=master)](https://travis-ci.org/blablacar/android-validator)
 
 Validate form with predefined constraints like not blank, email, file ...
 
@@ -53,28 +54,31 @@ Validate an User address:
 ```
 
 ```java
-    validator = new AddressFormValidator(address, city, state, zipCode, country, stateError, countryError);
-    Set<Violation> violations = validator.validate();
+    public class MyActivity extends Activity {
+        AddressFormValidator validator = new AddressFormValidator(address, city, state, zipCode, country, stateError, countryError);
 
-    if(!violations.isEmpty()) {
-        for (Violation violation : violations) {
-            if (PROPERTY_ADDRESS.equals(violation.getPropertyName())) {
-                setTextInputLayoutError(address, violation.getMessage());
-            } else if (PROPERTY_CITY.equals(violation.getPropertyName())) {
-                ((TextInputLayout) city.getParent()).setError(violation.getMessage());
-                setTextInputLayoutError(city, violation.getMessage());
-            } else if (PROPERTY_STATE.equals(violation.getPropertyName())) {
-                stateError.setVisibility(View.VISIBLE);
-                stateError.setText(violation.getMessage());
-            } else if (PROPERTY_ZIP_CODE.equals(violation.getPropertyName())) {
-                setTextInputLayoutError(zipCode, violation.getMessage());
-            } else if (PROPERTY_COUNTRY.equals(violation.getPropertyName())) {
-                countryError.setVisibility(View.VISIBLE);
-                countryError.setText(violation.getMessage());
+        Set<Violation> violations = validator.validate();
+
+        if(!violations.isEmpty()) {
+            for (Violation violation : violations) {
+                if (PROPERTY_ADDRESS.equals(violation.getPropertyName())) {
+                    setTextInputLayoutError(address, violation.getMessage());
+                } else if (PROPERTY_CITY.equals(violation.getPropertyName())) {
+                    ((TextInputLayout) city.getParent()).setError(violation.getMessage());
+                    setTextInputLayoutError(city, violation.getMessage());
+                } else if (PROPERTY_STATE.equals(violation.getPropertyName())) {
+                    stateError.setVisibility(View.VISIBLE);
+                    stateError.setText(violation.getMessage());
+                } else if (PROPERTY_ZIP_CODE.equals(violation.getPropertyName())) {
+                    setTextInputLayoutError(zipCode, violation.getMessage());
+                } else if (PROPERTY_COUNTRY.equals(violation.getPropertyName())) {
+                    countryError.setVisibility(View.VISIBLE);
+                    countryError.setText(violation.getMessage());
+                }
             }
+        } else {
+            Toast.makeText(this, "Is Valid", Toast.LENGTH_LONG).show();
         }
-    } else {
-        Toast.makeText(this, "Is Valid", Toast.LENGTH_LONG).show();
     }
 ```
 
